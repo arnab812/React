@@ -135,3 +135,34 @@ function parent_function_component() {
         * Useful technique for creating dynamic pieces of JSX based on the state of our application. 
         * We can use functions to calculate values to perform other logic and return the result as JSX to be rendered in our component.
 */
+
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- //
+ 
+// * Here's an example of a function that creates dynamic JSX based on the state of an application:   
+import React, { useState } from 'react';
+
+function MyComponent() {
+  const [count, setCount] = useState(0); // 'useState' Hook 
+
+  function renderCount() {
+    if (count === 0) {
+      return <p>The count is currently zero.</p>;
+    } else {
+      return <p>The count is currently {count}.</p>;
+    }
+  }
+  
+  function handleClick() {
+    setCount(count + 1);
+  }
+  
+  return (
+    <div>
+      {renderCount()}
+      <button onClick={handleClick}>Increment Count</button>
+    </div>
+  );
+}
+  
+  
+  
