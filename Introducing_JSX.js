@@ -164,5 +164,15 @@ function MyComponent() {
   );
 }
   
-  
+ 
+/*
+  ! Code explanation : 
+  In this example, we define a functional component called MyComponent. Inside the component, we use the useState hook to define a count state variable with an initial value of 0.
+
+  We then define a function called renderCount that returns a JSX element based on the current value of count. If count is 0, it returns a <p> element that says "The count is currently zero." Otherwise, it returns a <p> element that says "The count is currently {count}." We call this function to dynamically render the appropriate text based on the value of count.
+
+  We also define a function called handleClick that increments count when a button is clicked.
+
+  Finally, we render the result of calling renderCount() along with a button that calls handleClick when clicked. This creates a dynamic piece of JSX that changes based on the state of our application (the value of count).
+*/
   
