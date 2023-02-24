@@ -175,4 +175,77 @@ function MyComponent() {
 
   Finally, we render the result of calling renderCount() along with a button that calls handleClick when clicked. This creates a dynamic piece of JSX that changes based on the state of our application (the value of count).
 */
-  
+ 
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- //
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- //
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- //
+
+// * Specifying Attributes with JSX :
+const new_element = <a href="https://www.reactjs.org"> link </a>;
+
+const img_element = <img src={user.avatarUrl}></img>;
+
+// * JSX Prevents - Injection Attacks :
+// It is safe to embed user input in JSX:
+
+const title = response.potentiallyMaliciousInput;
+// This is safe:
+const user_input = <h1>{title}</h1>;
+
+/* By default, React DOM escapes any values embedded in JSX before rendering them.
+   Thus it ensures that you can never inject anything that’s not explicitly written in your application.
+   Everything is converted to a string before being rendered. This helps prevent XSS (cross-site-scripting) attacks.
+*/
+
+// ! How JSX prevents injection attacks : rendering (translating) the user input as plain text -
+function take_user_input() {
+  const user_input = '<script>alert("Hello, world!")</script>'; // script-tag
+
+  return (
+    <div>
+      <p> User input : {user_input}</p> // ? code explanation
+    </div>
+  );
+}
+
+/*
+! code explanation : 
+    * 'user_input' variable contains a script tag. 
+    * When we render 'user_input' within a 'p' element, React automatically escapes special characters in the script tag and renders it as plain text.  
+
+? Resulting HTML code : 
+    <div>
+        * <p>User input : &lt:script&gt;alert("Hello, world!);&lt;/script&gt;</p>
+    </div>
+*/
+
+/*
+* => JSX represents objects : 
+
+! Babel compiles JSX down to React.createElement() calls.
+
+* These two examples are identical:
+
+
+*/
+
+const JSX_element = <h1 className="greeting">Hello, world!</h1>;
+
+// * JSX code after compilation :
+
+const compiled_JSX_element = React.createElement(
+  "h1",
+  { className: "greeting" },
+  "Hello, world!"
+);
+
+// * React.createElement() performs a few checks to help you write bug-free code but essentially it creates an object like this:
+
+const compiled_element = {
+  type: "h1",
+  props: {
+    className: "greeting",
+    children: "Hello, world!",
+  },
+};
+
